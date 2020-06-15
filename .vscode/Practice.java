@@ -4,16 +4,26 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import mypackage.Cow;
 
 
 public class Practice {
     public static void main(String[] args) throws FileNotFoundException, IOException {
-        FileReader fr = new FileReader("C:\\Users\\kevin\\Desktop\\cowData.txt");//Grabs a file to read
+        FileReader fr = new FileReader("cowData.txt");//Grabs a file to read
         BufferedReader read = new BufferedReader(fr);//Stores the file into a buffer
         String line;// variable to focus on single line at a time
+        boolean flag = true;
         ArrayList<Cow> cowlist=new ArrayList<Cow>();
+        while(flag == true){//NEED TO CREATE A INPUT READER TO MATCH THE OPTIONS BELOW
+            System.out.println("PLEASE CHOOSE FROM THE OPTIONS BELOW");
+            System.out.println("1. ADD A NEW COW RECORD");
+            System.out.println("2. EDIT AN EXISTING COW");
+            System.out.println("3. REMOVE AN EXISTING COW");
+            System.out.println("4. READ STORED RECORDS");
+            flag = false;
+        }
         while ((line = read.readLine()) != null) {
             String[] pieces = line.split(" ");//breaks up the string with each space
             if(pieces.length == 4){// makes sure that the record contains 4 values
@@ -79,5 +89,16 @@ public class Practice {
             }
         }
         return -1;
+    }
+
+
+    public boolean inputcheck(String input){
+        try{
+            Integer.parseInt(input);
+        }
+        catch(NumberFormatException exception){
+            return false;
+        }
+        return true;
     }
 }
