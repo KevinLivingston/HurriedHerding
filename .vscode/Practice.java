@@ -14,27 +14,7 @@ public class Practice {
         FileReader fr = new FileReader("cowData.txt");//Grabs a file to read
         BufferedReader read = new BufferedReader(fr);//Stores the file into a buffer
         String line;// variable to focus on single line at a time
-        boolean flag = true;
-        ArrayList<Cow> cowlist=new ArrayList<Cow>();
-        while(flag == true){//NEED TO CREATE A INPUT READER TO MATCH THE OPTIONS BELOW
-            System.out.println("PLEASE CHOOSE FROM THE OPTIONS BELOW");
-            System.out.println("1. ADD A NEW COW RECORD");
-            System.out.println("2. EDIT AN EXISTING COW");
-            System.out.println("3. REMOVE AN EXISTING COW");
-            System.out.println("4. READ STORED RECORDS");
-            Scanner sc = new Scanner(System.in);//creates a new Scanner for input
-            String input = sc.nextLine();// saves the input
-            Boolean num_check = inputcheck(input);//checks if input is a number
-            System.out.println(num_check);//print result
-            if (num_check == true){//if input is a number
-                int value = Integer.parseInt(input);//convert input to a number
-                System.out.println(value);
-            }
-            System.out.println(input);
-            sc.close();
-
-            flag = false;
-        }
+        ArrayList<Cow> cowlist=new ArrayList<Cow>();//CHANGE TO A LINKED LIST, BETTER FOR ADD/REMOVE
         while ((line = read.readLine()) != null) {
             String[] pieces = line.split(" ");// breaks up the string with each space
             if (pieces.length == 4) {// makes sure that the record contains 4 values
@@ -84,9 +64,64 @@ public class Practice {
                 System.out.println("BAD RECORD");// record does not have the correct amount of values
             }
         }
-        for (int i = 0; i < cowlist.size(); i++) {
-            System.out.println(cowlist.get(i));
+        boolean flag = true;
+
+        Scanner sc = new Scanner(System.in);//creates a new Scanner for input
+        while(flag == true){//NEED TO CREATE A INPUT READER TO MATCH THE OPTIONS BELOW
+            System.out.println("PLEASE CHOOSE FROM THE OPTIONS BELOW");
+            System.out.println("1. ADD A NEW COW RECORD");
+            System.out.println("2. EDIT AN EXISTING COW");
+            System.out.println("3. REMOVE AN EXISTING COW");
+            System.out.println("4. READ STORED RECORDS");
+            int input;
+            input = sc.nextInt();//HANDLE INPUT MISMATCH EXCEPTION
+            if (input > 0){//if input is a number
+                switch(input){//HANDLE THE
+                    case 1: 
+                        //ADD A NEW COW
+                        System.out.println("ADDING A NEW COW, ENTER A NEW ID");
+                        Scanner cowcreate = new Scanner(System.in);
+                        int newid = cowcreate.nextInt();
+                        Cow newCow= new Cow(newid);
+                        cowlist.add(newCow);
+                        cowcreate.close();
+                        break;
+                    case 2:
+                        // EDIT AN EXISTING COW
+                        System.out.println("PLEASE ENTER A COW ID FOR EDITING");
+                        
+                        System.out.println(2);
+
+                        break;
+                    case 3:
+                        //REMOVE A COW 
+                        System.out.println(3);
+
+                        break;
+                    case 4: 
+                        //print the current list of cow records
+                        for (int i = 0; i < cowlist.size(); i++) {
+                            System.out.println(cowlist.get(i));
+                        }
+
+                        break;
+                    case 5:
+                        //Exit Program
+                        System.out.println(5);
+                        flag =false;
+                        break;
+                    default:
+                        //NOT A VALID CHOICE
+                        System.out.println("INVALID NUMBER"); 
+                }
+            }
+            else{
+                System.out.println("NUMBER UNDER ZERO");
+            }
+
         }
+        sc.close();
+        
         System.out.print(cowlist.size());
 
         fr.close();// closes the file reader
@@ -101,7 +136,7 @@ public class Practice {
         return -1;
     }
 
-    public static boolean inputcheck(String input) {
+   /* public static boolean inputcheck(int input) {
         try{
             Integer.parseInt(input);
         }
@@ -109,5 +144,5 @@ public class Practice {
             return false;
         }
         return true;
-    }
+    }*/
 }
