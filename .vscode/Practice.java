@@ -1,9 +1,11 @@
+
 //test
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Scanner;
 
 import mypackage.Cow;
@@ -89,8 +91,21 @@ public class Practice {
                     case 2:
                         // EDIT AN EXISTING COW
                         System.out.println("PLEASE ENTER A COW ID FOR EDITING");
+                        Iterator<Cow> iter = cowlist.iterator();
+                        Scanner cowedit = new Scanner(System.in);
+                        int editid = cowedit.nextInt();
+                        while(iter.hasNext()){
+                            Cow current = iter.next();
+                            if(current.getid() == editid){System.out.println("MATCH!!!");
+                                System.out.println("Please enter a single character to edit a specific value");
+                                System.out.println("W for a new weighing");
+                                System.out.println("M for a new milking");
+                                System.out.println("T for a new Temperature");
+                                Scanner edittype = new Scanner(System.in);
+                                
+                        }//BREAK THE LOOP AND ASK FOR VALUES
                         
-                        System.out.println(2);
+                        }
 
                         break;
                     case 3:
